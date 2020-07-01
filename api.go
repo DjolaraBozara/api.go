@@ -42,7 +42,7 @@ var decks = allDecks{
 	},
 }
 
-func getAllDecks(w http.ResponseWriter, r *http.Request) {
+func openDeck(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(decks)
 }
 
@@ -87,5 +87,6 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/newDeck", newDeck).Methods("GET")
+	router.HandleFunc("/openDeck", openDeck).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
